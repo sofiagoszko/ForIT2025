@@ -4,19 +4,19 @@ import { v4 as uuid } from "uuid";
 interface Task{
     id: string,
     title: string, 
-    descripcion: string,
+    description: string,
     complete: boolean,
     createdAt: Date
 }
 
-function validate(title: string, descripcion: string): string[]{
-    const errors: string[] = [];
+function validate(title: string, description: string): { title?: string; description?: string }{
+    const errors: { title?: string; description?: string } = {};
 
     if(!title || title.trim() == ""){
-        errors.push("Por favor ingrese un titulo válido");
+        errors.title = "Por favor ingrese un titulo válido";
     }
-    if(!descripcion || descripcion.trim() == ""){
-        errors.push("Por favor ingrese una descripción válida");
+    if(!description || description.trim() == ""){
+        errors.description = "Por favor ingrese una descripción válida";
     }
     
     return errors;    
@@ -30,17 +30,17 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.post("/", (req: Request, res: Response) => {
-    const { title, descripcion } = req.body;
-    const errors = validate(title, descripcion);
+    const { title, description } = req.body;
+    const errors = validate(title, description);
 
-    if(errors.length>0){
+    if(Object.keys(errors).length > 0){
         return res.status(400).json({ errors })
     }
 
     const newTask: Task = {
         id: uuid(),
         title: title, 
-        descripcion: descripcion,
+        description: description,
         complete: false,
         createdAt: new Date()
     };
