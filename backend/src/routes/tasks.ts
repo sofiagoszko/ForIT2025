@@ -61,4 +61,14 @@ router.delete("/:id", (req: Request, res: Response) => {
   res.json(task);
 });
 
+router.put("/:id", (req: Request, res: Response) => {
+  const id = String(req.params.id);
+  const task = tasks.find(t => t.id === id);
+  if (!task) return res.status(404).json({ error: "No se encontró la tarea buscada" });
+
+  task.title = req.body.title || task.title;
+  task.description = req.body.description || task.description; 
+  res.json(task);
+});
+
 export default router;
