@@ -11,7 +11,7 @@ export default function TaskItem({ task }: { task: Task }) {
     <div>
       <h3>{task.title}</h3>
       <p><strong>Descripción:</strong> {task.description}</p>
-      <p><strong>Completada:</strong> {task.complete}</p>
+      <p><strong>Estado:</strong> {task.complete ? "Finalizada" : "Abierta"}</p>
       <p><strong>Fecha de creación:</strong> {new Date(task.createdAt).toLocaleString()}</p>
     </div>
   );
