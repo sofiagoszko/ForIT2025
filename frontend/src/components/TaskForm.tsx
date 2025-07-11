@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function TaskForm(){
   type Errors = {
@@ -11,6 +11,7 @@ export default function TaskForm(){
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState<Errors>({});
+  const {taskID} = useParams();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,39 +36,52 @@ export default function TaskForm(){
     }
   };
 
+    const title_page = () => {
+      if(taskID){
+          return <h2 className='text-center'>Actualizar Tarea</h2>
+      }else{
+          return <h2 className='text-center'>Nueva Tarea</h2>
+      }
+    }
+
   return (
-      <section>
-        <h1>Alta nueva tarea</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <div>
-              <label htmlFor="title">
-                Titulo <span className="text-danger">*</span>
-              </label>
-              <input type="text" id="title" placeholder="Ingresa el título de la tarea" value={title} onChange={(e) => setTitle(e.target.value)} required/>
-            </div>
-            {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
-          </div>
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
+            <div className="card shadow-sm p-4">
+              <div className="card-body">
+                <h1>{title_page()}</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                      <label htmlFor="title">
+                        Titulo <span className="text-danger">*</span>
+                      </label>
+                      <input className="form-control" type="text" id="title" placeholder="Ingresa el título de la tarea" value={title} onChange={(e) => setTitle(e.target.value)} required/>
+                      {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
+                    </div>
 
-          <div>
-            <div>
-              <label htmlFor="description">
-                Descripción <span className="text-danger">*</span>
-              </label>
-              <textarea placeholder="Ingresa la descripción de la tarea" id="floatingTextarea" value={description} onChange={(e) => setDescription(e.target.value)} required/>
-            </div>
-            {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
-          </div>
+                    <div className="mb-3">
+                      <label htmlFor="description">
+                        Descripción <span className="text-danger">*</span>
+                      </label>
+                      <textarea className="form-control" placeholder="Ingresa la descripción de la tarea" id="floatingTextarea" value={description} onChange={(e) => setDescription(e.target.value)} required/>
+                      {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
+                    </div>
 
-          <div className="d-flex justify-content-around mb-5">
-            <Link to="/" className="btn btn-secondary">
-              Cancelar
-            </Link>
-            <button type="submit" className="btn btn-success">
-              Aceptar
-            </button>
+
+                  <div className="d-flex justify-content-evenly mt-3">
+                    <Link to="/" className="btn btn-danger">
+                      Cancelar
+                    </Link>
+                    <button type="submit" className="btn btn-success">
+                      Aceptar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-        </form>
-      </section>
+        </div>
+      </div>
   );
 };
