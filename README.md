@@ -51,6 +51,7 @@ npm run dev
 ```
 cd frontend
 npm install
+npm install sweetalert2
 npm run dev
 ```
 

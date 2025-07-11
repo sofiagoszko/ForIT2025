@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import TaskItem from "./TaskItem";
+import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 interface Task{
     id: string,
@@ -18,12 +19,75 @@ export default function TaskList() {
       .then(setTasks);
   }, []);
 
+  const deleteTask = (taskID: string) => {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskID}`, {
+          method: "DELETE",
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error("Error al eliminar la tarea");
+            return res.json();
+          })
+          .then(() => {
+            // Actualizar la lista eliminando la tarea del estado local
+            setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskID));
+
+            Swal.fire(
+              '¡Eliminada!',
+              'La tarea ha sido eliminada.',
+              'success'
+            );
+          })
+          .catch((error) => {
+            console.error(error);
+            Swal.fire(
+              'Error!',
+              'Hubo un problema al eliminar la tarea.',
+              'error'
+            );
+          });
+      }
+    });
+};
+
   return (
-    <div>
-      <h2>Lista de Tareas</h2>
-      {tasks.map(task => (
-        <TaskItem key={task.id} task={task} />
-      ))}
+    <div className="container">
+      <h2 className="text-center">Lista de Tareas</h2>
+      <Link to="/new-task" className="btn btn-primary mb-2">Nueva Tarea</Link>
+      <table className="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Alta</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map(task => 
+            <tr key={task.id}>
+              <td>{task.title}</td>
+              <td>{task.description}</td>
+              <td>{task.complete ? "Finalizada" : "Abierta"}</td>
+              <td>{new Date(task.createdAt).toLocaleString()}</td>
+              <td>
+                <Link className='btn btn-info' to={`/edit-task/${task.id}`}>Actualizar</Link>
+                <button style={{marginLeft:'10px'}} className='btn btn-danger' onClick={() => deleteTask(task.id)}>Eliminar</button>
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }
