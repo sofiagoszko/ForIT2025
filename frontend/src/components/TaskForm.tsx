@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import type { Task } from "../Types";
+import Swal from "sweetalert2";
 
 export default function TaskForm(){
   type Errors = {
@@ -50,7 +51,16 @@ export default function TaskForm(){
         const data = await response.json();
         setErrors(data.errors || {});
       }else{
-        navigate("/tasks");
+        const message = id
+          ? "La tarea fue actualizada correctamente"
+          : "La nueva tarea fue creada correctamente";
+        Swal.fire(
+          "¡Éxito!",
+          message,
+          "success"
+        ).then(() => {
+          navigate("/tasks")
+        });
       }
     }catch (err){
       console.error("ERROR ", err);
