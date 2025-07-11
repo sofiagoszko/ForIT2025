@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2'
-
-interface Task{
-    id: string,
-    title: string, 
-    description: string,
-    complete: boolean,
-    createdAt: Date
-}
+import type { Task } from "../Types";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);

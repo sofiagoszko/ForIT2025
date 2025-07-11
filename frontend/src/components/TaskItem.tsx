@@ -1,10 +1,4 @@
-interface Task{
-    id: string,
-    title: string, 
-    description: string,
-    complete: boolean,
-    createdAt: Date
-}
+import type { Task } from "../Types";
 
 export default function TaskItem({ task }: { task: Task }) {
   return (

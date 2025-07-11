@@ -14,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/tasks" element={<TaskList />}></Route>
             <Route path="/new-task" element={<TaskForm />}></Route>
+            <Route path="/edit-task/:id" element={<TaskForm />}></Route>
           </Routes >
         </div>
         <FooterComponent />
