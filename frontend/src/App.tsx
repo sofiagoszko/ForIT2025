@@ -1,21 +1,24 @@
 import "./App.css"
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
+import HeaderComponent from "./components/HeaderComponent";
+import FooterComponent from "./components/FooterComponent";
 
 function App() {
   return (
-    <Router>
-      <nav>
-        <Link to="/">Inicio</Link>
-        <Link to="/new-task">Nueva Tarea</Link>
-        <Link to="/tasks">Ver Tareas</Link>
-      </nav>
-      <Routes>
-        <Route path="/new-task" element={<TaskForm />} />
-        <Route path="/tasks" element={<TaskList />} />
-      </Routes>
-    </Router>
+    <div>
+      <Router>
+        <HeaderComponent />
+        <div className='container'>
+          <Routes>
+            <Route path="/tasks" element={<TaskList />}></Route>
+            <Route path="/new-task" element={<TaskForm />}></Route>
+          </Routes >
+        </div>
+        <FooterComponent />
+      </Router>
+    </div>
   );
 }
 
