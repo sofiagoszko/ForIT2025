@@ -29,6 +29,17 @@ router.get("/", (req: Request, res: Response) => {
     res.json(tasks);
 });
 
+router.get("/:id", (req: Request, res: Response) => {
+  const id = String(req.params.id);
+  const task = tasks.find(t => t.id === id);
+
+  if (!task) {
+    return res.status(404).json({ error: "No se encontró la tarea buscada" });
+  }
+
+  res.json(task);
+});
+
 router.post("/", (req: Request, res: Response) => {
     const { title, description } = req.body;
     const errors = validate(title, description);
