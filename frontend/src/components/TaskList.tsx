@@ -19,45 +19,48 @@ export default function TaskList() {
       .then(setTasks);
   }, []);
 
-  const deleteTask = (taskID: string) => {
+  const toggleTaskStatus = (taskID: string) => {
     Swal.fire({
-        title: '¿Estás seguro?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Eliminar',
-        cancelButtonText: 'Cancelar'
+      title: '¿Estás seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskID}`, {
           method: "DELETE",
         })
-          .then((res) => {
-            if (!res.ok) throw new Error("Error al eliminar la tarea");
-            return res.json();
-          })
-          .then(() => {
-            // Actualizar la lista eliminando la tarea del estado local
-            setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskID));
+        .then((res) => {
+          if (!res.ok) throw new Error("Error al cambiar el estado de la tarea");
+          return res.json();
+        })
+        .then((updatedTask) => {
+          setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+              task.id === taskID ? { ...task, complete: updatedTask.complete } : task
+            )
+          );
 
-            Swal.fire(
-              '¡Eliminada!',
-              'La tarea ha sido eliminada.',
-              'success'
-            );
-          })
-          .catch((error) => {
-            console.error(error);
-            Swal.fire(
-              'Error!',
-              'Hubo un problema al eliminar la tarea.',
-              'error'
-            );
-          });
+          Swal.fire(
+            '¡Actualizado!',
+            `La tarea ahora está ${updatedTask.complete ? "finalizada" : "abierta"}`,
+            'success'
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+          Swal.fire(
+            'Error!',
+            'Hubo un problema al cambiar el estado de la tarea.',
+            'error'
+          );
+        });
       }
     });
-};
+  };
 
   return (
     <div className="container">
@@ -82,7 +85,9 @@ export default function TaskList() {
               <td>{new Date(task.createdAt).toLocaleString()}</td>
               <td>
                 <Link className='btn btn-info' to={`/edit-task/${task.id}`}>Actualizar</Link>
-                <button style={{marginLeft:'10px'}} className='btn btn-danger' onClick={() => deleteTask(task.id)}>Eliminar</button>
+                <button style={{ marginLeft: "10px" }} className={`btn ${task.complete ? "btn-warning" : "btn-danger"}`} onClick={() => toggleTaskStatus(task.id)}>
+                  {task.complete ? "Activar" : "Finalizar"}
+              </button>
               </td>
             </tr>
           )}

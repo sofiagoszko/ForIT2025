@@ -57,7 +57,7 @@ router.delete("/:id", (req: Request, res: Response) => {
 
   if (!task) return res.status(404).json({ error: "No se encontró la tarea buscada" });
 
-  task.complete = true;
+  task.complete = !task.complete;
   res.json(task);
 });
 
