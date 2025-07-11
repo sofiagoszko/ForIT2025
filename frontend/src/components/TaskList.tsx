@@ -64,7 +64,7 @@ export default function TaskList() {
 
   return (
     <div className="container">
-      <h2 className="text-center">Lista de Tareas</h2>
+      <h1 className="text-center mt-4">Lista de Tareas</h1>
       <Link to="/new-task" className="btn btn-primary mb-2">Nueva Tarea</Link>
       <table className="table table-bordered table-striped">
         <thead>
