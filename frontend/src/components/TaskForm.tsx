@@ -89,7 +89,7 @@ export default function TaskForm(){
                   </div>
 
                   <div className="d-flex justify-content-evenly mt-3">
-                    <Link to="/" className="btn btn-danger">
+                    <Link to="/tasks" className="btn btn-danger">
                       Cancelar
                     </Link>
                     <button type="submit" className="btn btn-success">

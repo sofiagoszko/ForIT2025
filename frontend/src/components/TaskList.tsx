@@ -77,8 +77,9 @@ export default function TaskList() {
               <td>{task.complete ? "Finalizada" : "Abierta"}</td>
               <td>{new Date(task.createdAt).toLocaleString()}</td>
               <td>
-                <Link className='btn btn-info' to={`/edit-task/${task.id}`}>Actualizar</Link>
-                <button style={{ marginLeft: "10px" }} className={`btn ${task.complete ? "btn-warning" : "btn-danger"}`} onClick={() => toggleTaskStatus(task.id)}>
+                <Link className='btn btn-primary me-1' to={`/task/${task.id}`}>Visualizar</Link>
+                <Link className='btn btn-info me-1' to={`/edit-task/${task.id}`}>Actualizar</Link>
+                <button  className={`btn ${task.complete ? "btn-warning" : "btn-danger"}`} onClick={() => toggleTaskStatus(task.id)}>
                   {task.complete ? "Activar" : "Finalizar"}
               </button>
               </td>
