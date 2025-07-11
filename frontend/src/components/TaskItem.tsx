@@ -8,14 +8,9 @@ export default function TaskItem() {
 
   useEffect(() => {
     if(id){
-      fetch(`${import.meta.env.VITE_API_URL}/tasks`)
+      fetch(`${import.meta.env.VITE_API_URL}/tasks/${id}`)
         .then((res) => res.json())
-        .then((tasks) => {
-          const foundTask = tasks.find((t: Task) => t.id === id);
-          if(foundTask){
-            setTask(foundTask);
-          }
-        });
+        .then(setTask);
     }
   }, [id]);
 
