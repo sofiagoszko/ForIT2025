@@ -5,12 +5,18 @@ import type { Task } from "../Types";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [filter, setFilter] = useState<"Todas" | "Abierta" | "Finalizada">("Todas");
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/tasks`)
+    let url = `${import.meta.env.VITE_API_URL}/tasks`;
+    if (filter !== "Todas") {
+      url += `?status=${filter}`;
+    }
+
+    fetch(url)
       .then(res => res.json())
       .then(setTasks);
-  }, []);
+  }, [filter]);
 
   const toggleTaskStatus = (taskID: string) => {
     Swal.fire({
@@ -30,16 +36,19 @@ export default function TaskList() {
           if (!res.ok) throw new Error("Error al cambiar el estado de la tarea");
           return res.json();
         })
-        .then((updatedTask) => {
-          setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-              task.id === taskID ? { ...task, complete: updatedTask.complete } : task
-            )
-          );
+        .then(() => {
+          let url = `${import.meta.env.VITE_API_URL}/tasks`;
+          if (filter !== "Todas") {
+            url += `?status=${filter}`;
+          }
+
+          fetch(url)
+            .then(res => res.json())
+            .then(setTasks);
 
           Swal.fire(
             '¡Actualizado!',
-            `La tarea ahora está ${updatedTask.complete ? "finalizada" : "abierta"}`,
+            `El estado de la tarea fue cambiado correctamente.`,
             'success'
           );
         })
@@ -59,6 +68,19 @@ export default function TaskList() {
     <div className="container">
       <h1 className="text-center mt-4">Lista de Tareas</h1>
       <Link to="/new-task" className="btn btn-primary mb-2">Nueva Tarea</Link>
+      <div className="mb-3">
+        <label htmlFor="filter" className="form-label">Filtrar por estado</label>
+        <select
+          id="filter"
+          className="form-select"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value as "Todas" | "Abierta" | "Finalizada")}
+        >
+          <option value="Todas">Todas</option>
+          <option value="Abierta">Abierta</option>
+          <option value="Finalizada">Finalizada</option>
+        </select>
+      </div>
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
