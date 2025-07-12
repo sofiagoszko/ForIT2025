@@ -72,3 +72,62 @@ npm run dev
 ```
 
 > Por el momento las tareas no se guardan en una base de datos, por lo que toda la información guardada se pierde al tirar la aplicación
+
+
+## Aplicación andando
+
+### Home
+![Inicio](Home.png)
+
+### Listar tareas
+![Listado de tareas](<listado vacio-1.png>)
+
+### Crear tarea
+- Formulario para crear una tarea
+![Creación de tarea](<nueva tarea.png>)
+
+- Validaciones en el frontend
+![Validaciones frontend](<validacion front.png>)
+
+- Validaciones en el backend
+![Validaciones backend](<validacion back.png>)
+
+- Mensaje de éxito
+![Mensaje de éxito](<nueva exito.png>)
+
+- Listado de tareas con la nueva tarea creada
+![Listado de tareas con la nueva tarea creada](<listado con tarea.png>)
+
+### Editar tarea
+- Formulacio para editar la tarea
+![Formulacio para editar la tarea](<editar tarea.png>)
+
+- Mensaje de éxito
+![Mensake de éxito](<editar exito.png>)
+
+- Listado de tareas con la tarea editada
+![Listado de tareas con la tarea editada](<tarea editada.png>)
+
+### Visualizar una tarea
+![Visualizar una tarea](<Visulizar tarea.png>)
+
+### Finalizar una tarea
+- Pregunta antes de finalizar una tarea
+![Pregunta antes de finalizar una tarea](<Finalizar tarea.png>)
+
+- Mensaje de éxito
+![Mensaje de éxito](<Finalizar exito.png>)
+
+- Listado de tareas con la tarea finalizada
+![Listado de tareas con la tarea finalizada](<tarea finalizada.png>)
+
+### Filtrar de tareas
+
+- Listado de tareas sin filtrar
+![Listado de tareas sin filtrar](<listado con tareas.png>)
+
+- Tareas abiertas
+![Tareas abiertas](filtro1.png)
+
+- Tareas finalizadas
+![Tareas finalizadas](filtro2.png)
