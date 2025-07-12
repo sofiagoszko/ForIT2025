@@ -77,57 +77,57 @@ npm run dev
 ## Aplicación andando
 
 ### Home
-![Inicio](Home.png)
+![Inicio](./img/Home.png)
 
 ### Listar tareas
-![Listado de tareas](<listado vacio-1.png>)
+![Listado de tareas](<./img/listado vacio-1.png>)
 
 ### Crear tarea
 - Formulario para crear una tarea
-![Creación de tarea](<nueva tarea.png>)
+![Creación de tarea](<./img/nueva tarea.png>)
 
 - Validaciones en el frontend
-![Validaciones frontend](<validacion front.png>)
+![Validaciones frontend](<./img/validacion front.png>)
 
 - Validaciones en el backend
-![Validaciones backend](<validacion back.png>)
+![Validaciones backend](<./img/validacion back.png>)
 
 - Mensaje de éxito
-![Mensaje de éxito](<nueva exito.png>)
+![Mensaje de éxito](<./img/nueva exito.png>)
 
 - Listado de tareas con la nueva tarea creada
-![Listado de tareas con la nueva tarea creada](<listado con tarea.png>)
+![Listado de tareas con la nueva tarea creada](<./img/listado con tarea.png>)
 
 ### Editar tarea
 - Formulacio para editar la tarea
-![Formulacio para editar la tarea](<editar tarea.png>)
+![Formulacio para editar la tarea](<./img/editar tarea.png>)
 
 - Mensaje de éxito
-![Mensake de éxito](<editar exito.png>)
+![Mensake de éxito](<./img/editar exito.png>)
 
 - Listado de tareas con la tarea editada
-![Listado de tareas con la tarea editada](<tarea editada.png>)
+![Listado de tareas con la tarea editada](<./img/tarea editada.png>)
 
 ### Visualizar una tarea
-![Visualizar una tarea](<Visulizar tarea.png>)
+![Visualizar una tarea](<./img/Visulizar tarea.png>)
 
 ### Finalizar una tarea
 - Pregunta antes de finalizar una tarea
-![Pregunta antes de finalizar una tarea](<Finalizar tarea.png>)
+![Pregunta antes de finalizar una tarea](<./img/Finalizar tarea.png>)
 
 - Mensaje de éxito
-![Mensaje de éxito](<Finalizar exito.png>)
+![Mensaje de éxito](<./img/Finalizar exito.png>)
 
 - Listado de tareas con la tarea finalizada
-![Listado de tareas con la tarea finalizada](<tarea finalizada.png>)
+![Listado de tareas con la tarea finalizada](<./img/tarea finalizada.png>)
 
 ### Filtrar de tareas
 
 - Listado de tareas sin filtrar
-![Listado de tareas sin filtrar](<listado con tareas.png>)
+![Listado de tareas sin filtrar](<./img/listado con tareas.png>)
 
 - Tareas abiertas
-![Tareas abiertas](filtro1.png)
+![Tareas abiertas](./img/filtro1.png)
 
 - Tareas finalizadas
-![Tareas finalizadas](filtro2.png)
+![Tareas finalizadas](./img/filtro2.png)
