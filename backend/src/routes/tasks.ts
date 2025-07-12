@@ -26,8 +26,18 @@ const tasks: Task[] = [];
 const router = Router();
 
 router.get("/", (req: Request, res: Response) => {
-    res.json(tasks);
+    const status = req.query.status
+    let filteredTasks = tasks;
+
+    if(status === "Abierta"){
+      filteredTasks = tasks.filter(t => !t.complete);
+    }else if(status === "Finalizada"){
+      filteredTasks = tasks.filter(t => t.complete);
+    }
+
+    res.json(filteredTasks);
 });
+
 
 router.get("/:id", (req: Request, res: Response) => {
   const id = String(req.params.id);
