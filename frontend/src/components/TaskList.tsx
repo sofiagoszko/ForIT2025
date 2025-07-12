@@ -68,11 +68,11 @@ export default function TaskList() {
     <div className="container">
       <h1 className="text-center mt-4">Lista de Tareas</h1>
       <Link to="/new-task" className="btn btn-primary mb-2">Nueva Tarea</Link>
-      <div className="mb-3">
-        <label htmlFor="filter" className="form-label">Filtrar por estado</label>
+      <div className="mb-3 d-flex align-items-center">
+        <label htmlFor="filter" className="me-2 mb-0">Filtrar por estado</label>
         <select
           id="filter"
-          className="form-select"
+          className="form-select w-auto"
           value={filter}
           onChange={(e) => setFilter(e.target.value as "Todas" | "Abierta" | "Finalizada")}
         >
